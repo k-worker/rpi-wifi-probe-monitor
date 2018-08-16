@@ -1,0 +1,16 @@
+# custom systemd file to let us enable our wifi probe monitor via systemd
+[Unit]
+Description=customized wifi probe monitoring
+Requires=multi-user.target
+After=multi-user.target
+Conflicts=shutdown.target
+
+[Service]
+Type=simple
+ExecStart=/home/pi/wifi-probe-monitoring/do_everything.sh
+ExecStopPost=/home/pi/wifi-probe-monitoring/stop_monitor_mode.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=wifi-probe-monitor
